@@ -399,7 +399,8 @@ app.all('*', async (c) => {
     });
   }
 
-  console.log('[HTTP] Proxying:', url.pathname + url.search);
+  const redactedSearch = redactSensitiveParams(url);
+  console.log('[HTTP] Proxying:', url.pathname + redactedSearch);
   const httpResponse = await sandbox.containerFetch(request, MOLTBOT_PORT);
   console.log('[HTTP] Response status:', httpResponse.status);
 
